@@ -1,12 +1,8 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -16,52 +12,42 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+}
 
-	maven { url 'https://jitpack.io' }
+loom {
+	splitEnvironmentSourceSets()
 
-	maven {
-		name = 'Ladysnake Mods'
-		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	mods {
+		"smes" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
 	}
+
 }
 
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	// libgenetics
-	modImplementation "com.github.diamonddevv:libgenetics:${project.lg}"
-	include "com.github.diamonddevv:libgenetics:${project.lg}"
-
-	// Cardinal Components (CCA)
-	// BASE
-	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca}"
-	include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca}"
-	// LEVEL
-	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-level:${project.cca}"
-	include "dev.onyxstudios.cardinal-components-api:cardinal-components-level:${project.cca}"
-	// ENTITY
-	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca}"
-	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca}"
-
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	
 }
 
 processResources {
-	inputs.property "version", project.version
+	def version = project.version
+	inputs.property "version", version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+		expand "version": version
 	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+	it.options.release = 25
 }
 
 java {
@@ -69,18 +55,24 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
+	def projectName = project.name
+	inputs.property "projectName", projectName
+
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_$projectName"}
 	}
 }
 
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create("mavenJava", MavenPublication) {
 			from components.java
 		}
 	}
