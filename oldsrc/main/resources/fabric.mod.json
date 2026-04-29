@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "smes",
+  "version": "${version}",
+
+  "name": "Super Minigame Entertainment System",
+  "description": "SMES - a Minecraft Minigame Mod",
+  "authors": [
+    "DiamondDev"
+  ],
+  "contact": {
+    "homepage": "https://github.com/diamonddevv/",
+    "sources": "https://github.com/diamonddevv/smes"
+  },
+
+  "license": "MIT",
+  "icon": "assets/smes/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.diamond.smes.SmesMod"
+    ],
+    "client": [
+      "dev.diamond.smes.client.SmesClient"
+    ],
+    "cardinal-components": [
+      "dev.diamond.smes.cca.SmesEntityComponents"
+    ]
+  },
+  "custom": {
+    "cardinal-components": [
+    ]
+  },
+  "mixins": [
+    "smes.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.20",
+    "java": ">=17"
+  }
+}
