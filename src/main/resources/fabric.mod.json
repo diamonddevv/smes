@@ -3,23 +3,23 @@
 	"id": "smes",
 	"version": "${version}",
 	"name": "SMES",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "a minigame mod.",
 	"authors": [
-		"Me!"
+		"DiamondDev"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://diamonddevv.github.io/",
+		"sources": "https://github.com/diamonddevv/smes"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/smes/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.diamond.SMES"
+            "dev.diamond.smes.Smes"
 		],
 		"client": [
-			"dev.diamond.client.SMESClient"
+			"dev.diamond.smes.client.SmesClient"
 		]
 	},
 	"mixins": [
