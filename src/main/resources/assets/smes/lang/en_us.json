@@ -1,3 +1,7 @@
 {
-    "smes.ui.minigame.title": "Minigames"
+    "smes.ui.minigame.title": "Minigames",
+
+
+    "smes.minigame.rising_edge.title": "Rising Edge",
+    "smes.minigame.other_game.title": "Other Game"
 }
