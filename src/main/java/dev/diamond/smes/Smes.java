@@ -33,4 +33,7 @@ public class Smes implements ModInitializer {
 	public static Identifier id(String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
+	public static Identifier idmc(String path) {
+		return Identifier.withDefaultNamespace(path);
+	}
 }

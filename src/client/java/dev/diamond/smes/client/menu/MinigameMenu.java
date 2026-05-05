@@ -4,8 +4,7 @@ import dev.diamond.smes.Smes;
 import dev.diamond.smes.minigame.MinigameEntryDisplay;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.components.SpriteIconButton;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -17,10 +16,8 @@ public class MinigameMenu extends Screen {
 
     private static final Identifier BACKGROUND = Smes.id("textures/gui/minigame_menu.png");
 
-    private static final Identifier SCROLL_BUTTON_LEFT              = Smes.id("textures/gui/button_left.png");
-    private static final Identifier SCROLL_BUTTON_LEFT_FOCUSED      = Smes.id("textures/gui/button_left_focused.png");
-    private static final Identifier SCROLL_BUTTON_RIGHT             = Smes.id("textures/gui/button_right.png");
-    private static final Identifier SCROLL_BUTTON_RIGHT_FOCUSED     = Smes.id("textures/gui/button_right_focused.png");
+    private static final Identifier SPRITE_SCROLL_BUTTON_LEFT = Smes.idmc("icon/left.png");
+    private static final Identifier SPRITE_SCROLL_BUTTON_RIGHT = Smes.idmc("icon/right.png");
 
 
     private static final Component TITLE = Component.translatable("smes.ui.minigame.title");
@@ -57,32 +54,35 @@ public class MinigameMenu extends Screen {
         this.xo = (this.width  - IMAGE_WIDTH) / 2;
         this.yo = (this.height - IMAGE_HEIGHT) / 2;
 
-        this.leftScrollButton = new ImageButton(
-                this.xo + GAME_IMAGE_OFFSET_X - 16 - SCROLL_BUTTON_OFFSET_X,
-                this.yo + GAME_IMAGE_OFFSET_Y - 8 + (GAME_IMAGE_H / 2),
-                16,
-                16,
-                new WidgetSprites(SCROLL_BUTTON_LEFT, SCROLL_BUTTON_LEFT_FOCUSED),
-                btn -> {
+        this.leftScrollButton = this.addRenderableWidget(SpriteIconButton
+                .builder(Component.translatable("smes.ui.minigame.left"), btn -> {
                     this.displayIndex -= 1;
                     this.wrapDisplayIndex();
-                }
+                    }, true)
+                .sprite(SPRITE_SCROLL_BUTTON_LEFT, 16, 16)
+                .size(16, 16)
+                .build()
+        );
+        this.leftScrollButton.setPosition(
+                this.xo + GAME_IMAGE_OFFSET_X - 16 - SCROLL_BUTTON_OFFSET_X,
+                this.yo + GAME_IMAGE_OFFSET_Y - 8 + (GAME_IMAGE_H / 2)
         );
 
-        this.rightScrollButton = new ImageButton(
-                this.xo + GAME_IMAGE_OFFSET_X + SCROLL_BUTTON_OFFSET_X + GAME_IMAGE_W,
-                this.yo + GAME_IMAGE_OFFSET_Y - 8 + (GAME_IMAGE_H / 2),
-                16,
-                16,
-                new WidgetSprites(SCROLL_BUTTON_RIGHT, SCROLL_BUTTON_RIGHT_FOCUSED),
-                btn -> {
+
+        this.rightScrollButton = this.addRenderableWidget(SpriteIconButton
+                .builder(Component.translatable("smes.ui.minigame.right"), btn -> {
                     this.displayIndex += 1;
                     this.wrapDisplayIndex();
-                }
+                }, true)
+                .sprite(SPRITE_SCROLL_BUTTON_RIGHT, 16, 16)
+                .size(16, 16)
+                .build()
+        );
+        this.rightScrollButton.setPosition(
+                this.xo + GAME_IMAGE_OFFSET_X + SCROLL_BUTTON_OFFSET_X + GAME_IMAGE_W,
+                this.yo + GAME_IMAGE_OFFSET_Y - 8 + (GAME_IMAGE_H / 2)
         );
 
-        this.addRenderableWidget(this.leftScrollButton);
-        this.addRenderableWidget(this.rightScrollButton);
     }
 
     @Override

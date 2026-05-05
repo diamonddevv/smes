@@ -1,5 +1,7 @@
 {
     "smes.ui.minigame.title": "Minigames",
+    "smes.ui.minigame.left": "Previous",
+    "smes.ui.minigame.right": "Next",
 
 
     "smes.minigame.rising_edge.title": "Rising Edge",
