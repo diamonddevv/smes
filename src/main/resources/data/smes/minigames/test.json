@@ -1,0 +1,18 @@
+{
+    "display": {
+        "title": {
+            "type": "translatable",
+            "translate": "smes.minigame.test.title"
+        },
+        "image": "smes:textures/gui/minigame/test.png"
+    },
+
+    "type": "smes:test",
+
+    "settings": {
+        "name": {
+            "type": "translatable",
+            "translate": "smes.minigame.test.title"
+        }
+    }
+}

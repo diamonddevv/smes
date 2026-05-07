@@ -2,8 +2,8 @@
     "smes.ui.minigame.title": "Minigames",
     "smes.ui.minigame.left": "Previous",
     "smes.ui.minigame.right": "Next",
+    "smes.ui.minigame.load": "Load",
 
 
-    "smes.minigame.rising_edge.title": "Rising Edge",
-    "smes.minigame.other_game.title": "Other Game"
+    "smes.minigame.test.title": "Test Minigame"
 }

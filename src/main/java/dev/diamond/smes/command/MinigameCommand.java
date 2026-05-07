@@ -2,7 +2,6 @@ package dev.diamond.smes.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import dev.diamond.smes.data.MinigameResourceLoader;
 import dev.diamond.smes.minigame.MinigameEntry;
 import dev.diamond.smes.net.ClientboundOpenMinigameMenuPacket;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -24,7 +23,7 @@ public class MinigameCommand {
     private static int minigame(CommandContext<CommandSourceStack> ctx) {
         // open the screen
         if  (ctx.getSource().getPlayer() != null) {
-            ServerPlayNetworking.send(ctx.getSource().getPlayer(), new ClientboundOpenMinigameMenuPacket(MinigameEntry.getDisplays()));
+            ServerPlayNetworking.send(ctx.getSource().getPlayer(), ClientboundOpenMinigameMenuPacket.createPacket());
         }
 
         return 0;

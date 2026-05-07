@@ -1,9 +1,0 @@
-{
-    "display": {
-        "title": {
-            "type": "translatable",
-            "translate": "smes.minigame.other_game.title"
-        },
-        "image": "smes:textures/gui/minigame/the_other_one.png"
-    }
-}

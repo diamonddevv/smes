@@ -3,11 +3,14 @@ package dev.diamond.smes;
 import dev.diamond.smes.command.MinigameCommand;
 import dev.diamond.smes.data.MinigameResourceLoader;
 import dev.diamond.smes.net.Packets;
+import dev.diamond.smes.net.ServerPacketReceiver;
+import dev.diamond.smes.net.ServerboundLoadMinigamePacket;
+import dev.diamond.smes.registry.MinigameTypes;
+import dev.diamond.smes.util.SmesRegistries;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.impl.resource.ResourceLoaderImpl;
-import net.fabricmc.fabric.impl.resource.loader.ResourceManagerHelperImpl;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
@@ -23,6 +26,10 @@ public class Smes implements ModInitializer {
 	public void onInitialize() {
 
 		Packets.register();
+		ServerPacketReceiver.registerReceivers();
+
+		SmesRegistries.register();
+		MinigameTypes.register();
 		CommandRegistrationCallback.EVENT.register(MinigameCommand::register);
 
 		ResourceLoaderImpl.get(PackType.SERVER_DATA).registerReloadListener(id("minigame"), MinigameResourceLoader.INSTANCE);

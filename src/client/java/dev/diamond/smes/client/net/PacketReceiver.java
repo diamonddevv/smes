@@ -10,7 +10,7 @@ public class PacketReceiver {
 
     public static void registerReceivers() {
         ClientPlayNetworking.registerGlobalReceiver(ClientboundOpenMinigameMenuPacket.TYPE, (payload, context) -> {
-            Minecraft.getInstance().setScreen(new MinigameMenu(payload.displays()));
+            Minecraft.getInstance().setScreen(new MinigameMenu(payload.data()));
         });
     }
 

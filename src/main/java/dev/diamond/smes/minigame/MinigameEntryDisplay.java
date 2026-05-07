@@ -11,29 +11,13 @@ import net.minecraft.resources.Identifier;
 
 import java.util.List;
 
-public class MinigameEntryDisplay {
+public record MinigameEntryDisplay(Component title, Identifier imagePath) {
 
     public static final Codec<MinigameEntryDisplay> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ComponentSerialization.CODEC.fieldOf("title").forGetter(MinigameEntryDisplay::getTitle),
-            Identifier.CODEC.fieldOf("image").forGetter(MinigameEntryDisplay::getImagePath)
+            ComponentSerialization.CODEC.fieldOf("title").forGetter(MinigameEntryDisplay::title),
+            Identifier.CODEC.fieldOf("image").forGetter(MinigameEntryDisplay::imagePath)
     ).apply(instance, MinigameEntryDisplay::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, List<MinigameEntryDisplay>> STREAM_CODEC_LIST = ByteBufCodecs.fromCodecWithRegistries(CODEC.listOf());
 
 
-    private final Component title;
-    private final Identifier imagePath;
-
-    public MinigameEntryDisplay(Component title, Identifier imagePath) {
-        this.title = title;
-        this.imagePath = imagePath;
-    }
-
-    public Component getTitle() {
-        return title;
-    }
-
-    public Identifier getImagePath() {
-        return this.imagePath;
-    }
 }

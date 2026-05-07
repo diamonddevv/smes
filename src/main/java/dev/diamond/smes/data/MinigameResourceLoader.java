@@ -13,12 +13,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MinigameResourceLoader implements ResourceManagerReloadListener {
 
     public static final String ROOT = "minigames";
     public static final String EXT = ".json";
-    public static final ArrayList<MinigameEntry> MINIGAMES = new ArrayList<>();
+    public static final HashMap<Identifier, MinigameEntry> MINIGAMES = new HashMap<>();
 
     public static final MinigameResourceLoader INSTANCE = new MinigameResourceLoader();
 
@@ -49,7 +50,8 @@ public class MinigameResourceLoader implements ResourceManagerReloadListener {
                             .resultOrPartial(Smes.LOGGER::error)
                             .ifPresent(entry -> {
                                 Smes.LOGGER.info("registered minigame {}", id);
-                                MINIGAMES.add(entry);
+                                entry.id = id;
+                                MINIGAMES.put(id, entry);
                             });
 
                 } catch (IOException e) {

@@ -16,6 +16,7 @@ public class Packets {
 
     public static void register() {
         PayloadTypeRegistry.clientboundPlay().register(ClientboundOpenMinigameMenuPacket.TYPE, ClientboundOpenMinigameMenuPacket.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(ServerboundLoadMinigamePacket.TYPE, ServerboundLoadMinigamePacket.CODEC);
     }
 
 

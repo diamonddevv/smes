@@ -1,9 +1,0 @@
-{
-    "display": {
-        "title": {
-            "type": "translatable",
-            "translate": "smes.minigame.rising_edge.title"
-        },
-        "image": "smes:textures/gui/minigame/rising_edge.png"
-    }
-}
